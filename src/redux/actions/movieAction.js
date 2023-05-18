@@ -67,13 +67,23 @@ function getMovieDetails(id) {
         `/movie/${id}/recommendations?language=en-US&page=1&api_key=${API_KEY}`
       );
 
-      let [movieDetails, movieReviews, movieVideos, movieRecommendations] =
-        await Promise.all([
-          movieDetailsApi,
-          movieReviewsApi,
-          movieVideosApi,
-          movieRecommendationsApi,
-        ]);
+      const genreApi = api.get(
+        `/genre/movie/list?language=en&api_key=${API_KEY}`
+      );
+
+      let [
+        movieDetails,
+        movieReviews,
+        movieVideos,
+        movieRecommendations,
+        genreList,
+      ] = await Promise.all([
+        movieDetailsApi,
+        movieReviewsApi,
+        movieVideosApi,
+        movieRecommendationsApi,
+        genreApi,
+      ]);
 
       dispatch({
         type: "GET_MOVIE_DETAILS",
@@ -82,6 +92,7 @@ function getMovieDetails(id) {
           movieReviews: movieReviews.data,
           movieVideos: movieVideos.data,
           movieRecommendations: movieRecommendations.data,
+          genreList: genreList.data.genres,
         },
       });
     } catch (error) {
@@ -99,12 +110,20 @@ function getMoviesList() {
         `/movie/now_playing?language=en-US&page=1&api_key=${API_KEY}`
       );
 
-      let [movieList] = await Promise.all([getMovieListApi]);
+      const genreApi = api.get(
+        `/genre/movie/list?language=en&api_key=${API_KEY}`
+      );
+
+      let [movieList, genreList] = await Promise.all([
+        getMovieListApi,
+        genreApi,
+      ]);
 
       dispatch({
         type: "GET_MOVIES_LIST",
         payload: {
           movieList: movieList.data,
+          genreList: genreList.data.genres,
         },
       });
     } catch (error) {

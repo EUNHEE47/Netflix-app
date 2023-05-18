@@ -8,12 +8,18 @@ import { Badge, Col, Container, Modal, Row } from "react-bootstrap";
 import YouTube from "react-youtube";
 import { IoCloseSharp } from "react-icons/io5";
 import RelatedMovies from "../components/RelatedMovies";
+import { ClipLoader } from "react-spinners";
 
 const MovieDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { movieDetails, movieReviews, movieVideos, movieRecommendations } =
-    useSelector((state) => state.movie);
+  const {
+    movieDetails,
+    movieReviews,
+    movieVideos,
+    movieRecommendations,
+    loading,
+  } = useSelector((state) => state.movie);
   const [modalShow, setModalShow] = useState(false);
   const [reviews, setReviews] = useState(true);
   const [related, setRelated] = useState(false);
@@ -41,12 +47,21 @@ const MovieDetail = () => {
     setReviews(false);
   };
 
-  console.log("reviews", reviews, "related", related);
-
   useEffect(() => {
     dispatch(movieAction.getMovieDetails(id));
     window.scrollTo(0, 0);
   }, [id]);
+
+  if (loading) {
+    return (
+      <ClipLoader
+        color="red"
+        loading={loading}
+        size={150}
+        className="loading"
+      />
+    );
+  }
 
   return (
     <Container className="detail-page">
@@ -117,13 +132,14 @@ const MovieDetail = () => {
           className={reviews ? "reviews-btn btn-active" : "reviews-btn"}
           onClick={activeReviewsBtn}
         >
-          REVIEWS({movieReviews.results.length})
+          REVIEWS({movieReviews.results && movieReviews.results.length})
         </button>
         <button
           className={related ? "related-btn : btn-active" : "related-btn"}
           onClick={activeRelatedBtn}
         >
-          RELATED MOVIES({movieRecommendations.results.length})
+          RELATED MOVIES(
+          {movieRecommendations.results && movieRecommendations.results.length})
         </button>
       </div>
       <div className={reviews ? "review-content" : "hide"}>
@@ -135,9 +151,14 @@ const MovieDetail = () => {
             </div>
           ))}
       </div>
-      <div className={related ? "related-content" : "hide"}>
-        <RelatedMovies movieRecommendations={movieRecommendations.results} />
-      </div>
+      <Row className={related ? "related-content" : "hide"}>
+        {movieRecommendations.results &&
+          movieRecommendations.results.map((recs) => (
+            <Col lg={3} md={6} sm={12}>
+              <RelatedMovies recs={recs} />
+            </Col>
+          ))}
+      </Row>
     </Container>
   );
 };
