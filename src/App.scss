@@ -1,0 +1,294 @@
+@font-face {
+  font-family: "OTWelcomeRA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "OTWelcomeRA";
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.netflix {
+  position: relative;
+  height: 100vh;
+}
+
+.loading {
+  position: absolute;
+  left: 45%;
+  top: 40%;
+}
+// nav
+.navbar {
+  background-color: black;
+  position: fixed;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  margin-right: 1em;
+  &:nth-child(1) {
+    margin-left: 1em;
+  }
+  &:hover {
+    color: rgba(255, 255, 255, 0.548);
+    transition: 0.5s;
+  }
+}
+
+.d-flex {
+  input {
+    font-size: 12px;
+  }
+}
+
+// banner
+.banner {
+  margin-top: 4.7em;
+  height: 91vh;
+  display: flex;
+  align-items: flex-end;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.banner::before {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: linear-gradient(to top, black, transparent);
+  z-index: 1;
+}
+
+.banner-info {
+  width: 60%;
+  margin: 0 0 5em 2em;
+  z-index: 2;
+  h1 {
+    font-family: "TheJamsil5Bold";
+    font-weight: bolder;
+    margin-bottom: 1em;
+  }
+}
+
+// Carousel
+
+.react-multi-carousel-list {
+  padding-bottom: 5em;
+}
+
+.movie-card {
+  display: block;
+  height: 12em;
+  border-radius: 10px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+  margin-right: 1em;
+}
+
+.overlay {
+  opacity: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding-left: 1em;
+  ul,
+  li {
+    list-style: none;
+    padding: 0;
+    display: inline;
+  }
+  li {
+    margin-right: 3px;
+    span {
+      padding: 0.5em;
+      font-size: 10px;
+    }
+  }
+}
+
+.movie-card:hover .overlay {
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.movie-card-social {
+  span {
+    &:nth-child(1) {
+      margin-right: 3em;
+    }
+    &:nth-child(2) {
+      color: red;
+      font-style: italic;
+      font-weight: bolder;
+    }
+  }
+}
+
+.detail-page {
+  margin-top: 4.6em;
+  padding-bottom: 2em;
+}
+
+// detail
+
+.movie-detail {
+  margin-bottom: 7em;
+}
+
+.detail-poster {
+  padding: 0 3em;
+  text-align: right;
+  img {
+    width: 85%;
+  }
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  h1 {
+    font-weight: bolder;
+    margin: 0;
+    font-size: 50px;
+  }
+}
+
+.detail-badge {
+  font-size: 1em;
+  margin: 0 1em 1em 0;
+}
+
+.detail-social {
+  span {
+    margin-right: 1em;
+    &:nth-child(3) {
+      color: #ff0000a7;
+      font-style: italic;
+    }
+  }
+}
+
+.detail-overview {
+  border: 1px solid white;
+  border-width: 1px 0;
+  padding: 4em 0;
+}
+
+.detail-info-list {
+  list-style: none;
+  padding: 0;
+  font-size: 12px;
+  span {
+    display: inline-block;
+    background-color: #ff0000a7;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 7em;
+    margin: 0 0.5em 0.5em 0;
+  }
+}
+
+.modal-btn {
+  border: 1px solid #ff0000a7;
+  box-shadow: 0 0 5px;
+  background-color: black;
+  color: white;
+  width: 10em;
+  padding: 0.5em;
+  &:hover {
+    background-color: #ff0000a7;
+    transition: all 0.3s;
+  }
+}
+
+.btns {
+  text-align: center;
+  margin-bottom: 3em;
+  button {
+    margin: 0 1em;
+    padding: 0.5em 3em;
+  }
+}
+
+.review-content {
+  border: 3px solid white;
+  width: 80%;
+  margin: auto;
+  font-size: 14px;
+  padding: 2em;
+}
+
+.comment {
+  border-bottom: 1px solid white;
+  &:last-child {
+    border: none;
+  }
+  h5 {
+    margin-top: 1em;
+  }
+}
+
+.modal-content {
+  background-color: #000000;
+  color: red;
+}
+
+.modal-header {
+  border: none;
+  position: relative;
+}
+
+.close-btn {
+  border: 1px solid red;
+  border-radius: 10px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 3;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+.btn-active {
+  background-color: #ff0000a7;
+  color: white;
+}
+
+.hide {
+  display: none;
+}
