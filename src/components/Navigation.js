@@ -1,10 +1,21 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 
 const Navigation = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [keyword, setKeyword] = useState("");
+
+  const searchMovie = (e) => {
+    e.preventDefault();
+    navigate("/movies");
+    dispatch({ type: "GET_KEYWORD", payload: { keyword } });
+  };
+
   return (
     <Navbar fixed="top" expand="lg" variant="dark">
       <Container fluid>
@@ -28,14 +39,16 @@ const Navigation = () => {
               Movies
             </Link>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={searchMovie}>
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              onChange={(e) => setKeyword(e.target.value)}
             />
-            <Button variant="outline-danger">
+
+            <Button type="submit" variant="outline-danger">
               <BsSearch />
             </Button>
           </Form>

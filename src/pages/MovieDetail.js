@@ -27,7 +27,7 @@ const MovieDetail = () => {
   // console.log("movieDetails ?", movieDetails);
   // console.log("movieReviews ?", movieReviews);
   // console.log("movieVideos?", movieVideos);
-  console.log("movieRecommendations?", movieRecommendations);
+  // console.log("movieRecommendations?", movieRecommendations);
 
   const opts = {
     height: "560",
@@ -49,6 +49,7 @@ const MovieDetail = () => {
 
   useEffect(() => {
     dispatch(movieAction.getMovieDetails(id));
+
     window.scrollTo(0, 0);
   }, [id]);
 

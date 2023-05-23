@@ -1,14 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const MovieListCard = ({ movie }) => {
+  const navigate = useNavigate();
   const { genreList } = useSelector((state) => state.movie);
-  console.log("movie", movie);
+  // console.log("movie", movie);
   // console.log("genreList", genreList);
 
   return (
-    <div className="movies-card">
+    <div
+      className="movies-card"
+      onClick={() => navigate(`/movies/${movie.id}`)}
+    >
       <div
         className="blur_back bright_back"
         style={{
@@ -30,8 +35,10 @@ const MovieListCard = ({ movie }) => {
             </div>
           </div>
           <ul>
-            {movie.genre_ids.map((gen) => (
-              <li>{genreList.find((item) => item.id === gen).name}</li>
+            {movie.genre_ids.map((gen, index) => (
+              <li key={index}>
+                {genreList.find((item) => item.id === gen).name}
+              </li>
             ))}
           </ul>
         </div>

@@ -23,8 +23,8 @@ const MovieCard = ({ item }) => {
 
         <ul>
           {item.genre_ids.map((id, index) => (
-            <li>
-              <Badge bg="danger" key={index}>
+            <li key={index}>
+              <Badge bg="danger">
                 {genreList.find((item) => item.id === id).name}
               </Badge>
             </li>

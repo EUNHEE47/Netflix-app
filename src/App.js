@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import MovieDetail from "./pages/MovieDetail";
 import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 import "./App.scss";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:id" element={<MovieDetail />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -9,6 +9,8 @@ let initialState = {
   movieList: {},
   movieVideos: {},
   movieRecommendations: {},
+  keyword: "",
+  sortMovie: {},
 };
 
 function movieReducer(state = initialState, action) {
@@ -45,10 +47,13 @@ function movieReducer(state = initialState, action) {
         genreList: payload.genreList,
         loading: false,
       };
+    case "GET_KEYWORD":
+      return { ...state, keyword: payload.keyword };
 
     case "GET_MOVIES_FAILURE":
       return { ...state, loading: false };
-
+    case "GET_SORT_BY_MOVIE":
+      return { ...state, sortMovie: payload.sortMovie };
     default:
       return { ...state };
   }

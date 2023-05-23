@@ -49,7 +49,7 @@ function getMovies() {
 function getMovieDetails(id) {
   return async (dispatch) => {
     try {
-      dispatch({ type: "GET_MOVIE_DETAILS_REQUEST" });
+      // dispatch({ type: "GET_MOVIES_REQUEST" });
 
       const movieDetailsApi = api.get(
         `/movie/${id}?language=en-US&api_key=${API_KEY}`
@@ -101,14 +101,22 @@ function getMovieDetails(id) {
   };
 }
 
-function getMoviesList() {
+function getMoviesList(page, keyword) {
   return async (dispatch) => {
     try {
-      dispatch({ type: "GET_MOVIES_LIST_REQUEST" });
+      dispatch({ type: "GET_MOVIES_REQUEST" });
 
-      const getMovieListApi = api.get(
-        `/movie/now_playing?language=en-US&page=1&api_key=${API_KEY}`
-      );
+      let getMovieListApi;
+
+      if (keyword !== "") {
+        getMovieListApi = api.get(
+          `/search/movie?query=${keyword}&language=en-US&page=${page}&api_key=${API_KEY}`
+        );
+      } else {
+        getMovieListApi = api.get(
+          `/movie/now_playing?language=en-US&page=${page}&api_key=${API_KEY}`
+        );
+      }
 
       const genreApi = api.get(
         `/genre/movie/list?language=en&api_key=${API_KEY}`
@@ -132,8 +140,28 @@ function getMoviesList() {
   };
 }
 
+function getSortByMovie(option) {
+  return async (dispatch) => {
+    try {
+      const getSortByMovieApi = await api.get(
+        `/discover/movie?page=1&language=en&include_adult=true&include_video=false&sort_by=${option}&api_key=${API_KEY}`
+      );
+      // console.log("option", option);
+      console.log("getSortByMovieApi?", getSortByMovieApi);
+
+      dispatch({
+        type: "GET_SORT_BY_MOVIE",
+        payload: { sortMovie: getSortByMovieApi.data },
+      });
+    } catch (error) {
+      dispatch({ type: "GET_MOVIES_FAILURE" });
+    }
+  };
+}
+
 export const movieAction = {
   getMovies,
   getMovieDetails,
   getMoviesList,
+  getSortByMovie,
 };
