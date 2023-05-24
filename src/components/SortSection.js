@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import FilterDropDown from "../components/FilterDropDown";
 import { IoCloseSharp } from "react-icons/io5";
+import { AiOutlineMenu } from "react-icons/ai";
 
 const SortSection = () => {
   const [close, setClose] = useState(false);
 
   return (
-    <div className={close ? "sort-section closed" : "sort-section"}>
+    <div className={close ? "sorting-section closed" : "sorting-section"}>
       <div className="name">
         <h2>Sort</h2>
-        <span>
-          <IoCloseSharp onClick={() => setClose(!close)} />
-        </span>
+        <p onClick={() => setClose(!close)}>
+          {close ? <IoCloseSharp /> : <AiOutlineMenu />}
+        </p>
       </div>
-      <div className="filter">
+      <div className="sort-type">
         <FilterDropDown></FilterDropDown>
       </div>
     </div>

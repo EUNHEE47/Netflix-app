@@ -24,7 +24,7 @@ const MovieDetail = () => {
   const [reviews, setReviews] = useState(true);
   const [related, setRelated] = useState(false);
 
-  console.log("movieDetails ?", movieDetails);
+  // console.log("movieDetails ?", movieDetails);
   // console.log("movieReviews ?", movieReviews);
   // console.log("movieVideos?", movieVideos);
   // console.log("movieRecommendations?", movieRecommendations);
@@ -108,13 +108,10 @@ const MovieDetail = () => {
             </li>
           </ul>
 
-          {/* {movieVideos.results.length === 0 ? (
-            <button className="modal-btn">No video</button>
-          ) : (
-            <> */}
           <button className="modal-btn" onClick={() => setModalShow(true)}>
             Watch Trailer
           </button>
+
           <Modal show={modalShow} onHide={() => setModalShow(false)} size="xl">
             <Modal.Header>
               <IoCloseSharp
@@ -124,18 +121,16 @@ const MovieDetail = () => {
             </Modal.Header>
             <Modal.Body>
               {movieVideos.results?.length === 0 ? (
-                <p>NO VIDEO</p>
+                <h1 className="modal-body-text">No Trailer</h1>
               ) : (
                 <YouTube videoId={movieVideos.results?.[0].key} opts={opts} />
               )}
             </Modal.Body>
           </Modal>
-          {/* </> */}
-          {/* )} */}
         </Col>
       </Row>
 
-      <div className="btns">
+      <div className="detail-inner-btns">
         <button
           className={reviews ? "reviews-btn btn-active" : "reviews-btn"}
           onClick={activeReviewsBtn}

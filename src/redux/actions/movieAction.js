@@ -95,8 +95,6 @@ function getMovieDetails(id) {
           genreList: genreList.data.genres,
         },
       });
-
-      console.log("movieVideos?", movieVideos.data);
     } catch (error) {
       dispatch({ type: "GET_MOVIES_FAILURE" });
     }
@@ -109,26 +107,6 @@ function getMoviesList(page, keyword, option, category) {
       dispatch({ type: "GET_MOVIES_REQUEST" });
 
       let getMovieListApi;
-
-      // if (category !== "") {
-      //   if (keyword !== "") {
-      //     getMovieListApi = api.get(
-      //       `/search/movie?query=${keyword}&language=en-US&page=${page}&api_key=${API_KEY}`
-      //     );
-      //   } else if (option !== "") {
-      //     getMovieListApi = api.get(
-      //       `/discover/movie?page=1&language=en&include_adult=true&include_video=false&sort_by=${option}&api_key=${API_KEY}`
-      //     );
-      //   } else {
-      //     getMovieListApi = api.get(
-      //       `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}&with_genres=${category}&api_key=${API_KEY}`
-      //     );
-      //   }
-      // } else {
-      //   getMovieListApi = api.get(
-      //     `/movie/now_playing?language=en-US&page=${page}&api_key=${API_KEY}`
-      //   );
-      // }
 
       console.log("keyword?", keyword);
       console.log("option?", option);

@@ -14,7 +14,7 @@ const MoviesList = () => {
   );
   const [currentPage, setCurrentPage] = useState(1);
   let totalItem = movieList.total_results;
-  console.log("movieList?", movieList);
+  // console.log("movieList?", movieList);
 
   useEffect(() => {
     dispatch(movieAction.getMoviesList(currentPage, keyword, option, genres));
