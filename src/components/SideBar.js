@@ -1,12 +1,12 @@
 import React from "react";
 import SortSection from "../components/SortSection";
-import FilterSection from "../components/FilterSection";
+import CategorySection from "./CategorySection";
 
 const SideBar = () => {
   return (
     <div className="sideBar-wrap">
       <SortSection />
-      <FilterSection />
+      <CategorySection />
     </div>
   );
 };

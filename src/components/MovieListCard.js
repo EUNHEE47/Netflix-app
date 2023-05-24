@@ -26,9 +26,14 @@ const MovieListCard = ({ movie }) => {
       <div className="info-section">
         <div className="list-card-header">
           <div className="header-content">
-            <img
-              src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`}
-            />
+            {movie.poster_path === null ? (
+              <p>No Img</p>
+            ) : (
+              <img
+                src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`}
+              />
+            )}
+
             <div className="header-title">
               <p>{movie.title}</p>
               <p>{movie.release_date}</p>

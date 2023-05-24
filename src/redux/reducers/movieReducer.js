@@ -10,7 +10,8 @@ let initialState = {
   movieVideos: {},
   movieRecommendations: {},
   keyword: "",
-  sortMovie: {},
+  option: "",
+  genres: "",
 };
 
 function movieReducer(state = initialState, action) {
@@ -47,13 +48,19 @@ function movieReducer(state = initialState, action) {
         genreList: payload.genreList,
         loading: false,
       };
+
     case "GET_KEYWORD":
       return { ...state, keyword: payload.keyword };
 
     case "GET_MOVIES_FAILURE":
       return { ...state, loading: false };
-    case "GET_SORT_BY_MOVIE":
-      return { ...state, sortMovie: payload.sortMovie };
+
+    case "GET_SORT_BY_OPTION":
+      return { ...state, option: payload.option };
+
+    case "GET_MOVIES_CATEGORY":
+      return { ...state, genres: payload.genres };
+
     default:
       return { ...state };
   }

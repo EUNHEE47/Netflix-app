@@ -49,7 +49,7 @@ function getMovies() {
 function getMovieDetails(id) {
   return async (dispatch) => {
     try {
-      // dispatch({ type: "GET_MOVIES_REQUEST" });
+      dispatch({ type: "GET_MOVIES_REQUEST" });
 
       const movieDetailsApi = api.get(
         `/movie/${id}?language=en-US&api_key=${API_KEY}`
@@ -95,22 +95,56 @@ function getMovieDetails(id) {
           genreList: genreList.data.genres,
         },
       });
+
+      console.log("movieVideos?", movieVideos.data);
     } catch (error) {
       dispatch({ type: "GET_MOVIES_FAILURE" });
     }
   };
 }
 
-function getMoviesList(page, keyword) {
+function getMoviesList(page, keyword, option, category) {
   return async (dispatch) => {
     try {
       dispatch({ type: "GET_MOVIES_REQUEST" });
 
       let getMovieListApi;
 
+      // if (category !== "") {
+      //   if (keyword !== "") {
+      //     getMovieListApi = api.get(
+      //       `/search/movie?query=${keyword}&language=en-US&page=${page}&api_key=${API_KEY}`
+      //     );
+      //   } else if (option !== "") {
+      //     getMovieListApi = api.get(
+      //       `/discover/movie?page=1&language=en&include_adult=true&include_video=false&sort_by=${option}&api_key=${API_KEY}`
+      //     );
+      //   } else {
+      //     getMovieListApi = api.get(
+      //       `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}&with_genres=${category}&api_key=${API_KEY}`
+      //     );
+      //   }
+      // } else {
+      //   getMovieListApi = api.get(
+      //     `/movie/now_playing?language=en-US&page=${page}&api_key=${API_KEY}`
+      //   );
+      // }
+
+      console.log("keyword?", keyword);
+      console.log("option?", option);
+      console.log("category?", category);
+
       if (keyword !== "") {
         getMovieListApi = api.get(
           `/search/movie?query=${keyword}&language=en-US&page=${page}&api_key=${API_KEY}`
+        );
+      } else if (option !== "") {
+        getMovieListApi = api.get(
+          `/discover/movie?page=1&language=en&include_adult=true&include_video=false&sort_by=${option}&api_key=${API_KEY}`
+        );
+      } else if (category !== "") {
+        getMovieListApi = api.get(
+          `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}&with_genres=${category}&api_key=${API_KEY}`
         );
       } else {
         getMovieListApi = api.get(
@@ -127,6 +161,8 @@ function getMoviesList(page, keyword) {
         genreApi,
       ]);
 
+      // console.log("getMovieListApi?", movieList.data);
+
       dispatch({
         type: "GET_MOVIES_LIST",
         payload: {
@@ -140,28 +176,8 @@ function getMoviesList(page, keyword) {
   };
 }
 
-function getSortByMovie(option) {
-  return async (dispatch) => {
-    try {
-      const getSortByMovieApi = await api.get(
-        `/discover/movie?page=1&language=en&include_adult=true&include_video=false&sort_by=${option}&api_key=${API_KEY}`
-      );
-      // console.log("option", option);
-      console.log("getSortByMovieApi?", getSortByMovieApi);
-
-      dispatch({
-        type: "GET_SORT_BY_MOVIE",
-        payload: { sortMovie: getSortByMovieApi.data },
-      });
-    } catch (error) {
-      dispatch({ type: "GET_MOVIES_FAILURE" });
-    }
-  };
-}
-
 export const movieAction = {
   getMovies,
   getMovieDetails,
   getMoviesList,
-  getSortByMovie,
 };

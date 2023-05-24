@@ -9,17 +9,16 @@ import Pagination from "react-js-pagination";
 
 const MoviesList = () => {
   const dispatch = useDispatch();
-  const { movieList, keyword, sortMovie, loading } = useSelector(
+  const { movieList, keyword, option, genres, loading } = useSelector(
     (state) => state.movie
   );
   const [currentPage, setCurrentPage] = useState(1);
   let totalItem = movieList.total_results;
-
-  // console.log("sortMovie?", sortMovie);
+  console.log("movieList?", movieList);
 
   useEffect(() => {
-    dispatch(movieAction.getMoviesList(currentPage, keyword));
-  }, [currentPage, keyword]);
+    dispatch(movieAction.getMoviesList(currentPage, keyword, option, genres));
+  }, [currentPage, keyword, option, genres]);
 
   if (loading) {
     return (

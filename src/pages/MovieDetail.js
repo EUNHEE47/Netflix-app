@@ -24,7 +24,7 @@ const MovieDetail = () => {
   const [reviews, setReviews] = useState(true);
   const [related, setRelated] = useState(false);
 
-  // console.log("movieDetails ?", movieDetails);
+  console.log("movieDetails ?", movieDetails);
   // console.log("movieReviews ?", movieReviews);
   // console.log("movieVideos?", movieVideos);
   // console.log("movieRecommendations?", movieRecommendations);
@@ -108,10 +108,13 @@ const MovieDetail = () => {
             </li>
           </ul>
 
+          {/* {movieVideos.results.length === 0 ? (
+            <button className="modal-btn">No video</button>
+          ) : (
+            <> */}
           <button className="modal-btn" onClick={() => setModalShow(true)}>
             Watch Trailer
           </button>
-
           <Modal show={modalShow} onHide={() => setModalShow(false)} size="xl">
             <Modal.Header>
               <IoCloseSharp
@@ -120,14 +123,18 @@ const MovieDetail = () => {
               />
             </Modal.Header>
             <Modal.Body>
-              <YouTube
-                videoId={movieVideos.results && movieVideos.results[0].key}
-                opts={opts}
-              />
+              {movieVideos.results?.length === 0 ? (
+                <p>NO VIDEO</p>
+              ) : (
+                <YouTube videoId={movieVideos.results?.[0].key} opts={opts} />
+              )}
             </Modal.Body>
           </Modal>
+          {/* </> */}
+          {/* )} */}
         </Col>
       </Row>
+
       <div className="btns">
         <button
           className={reviews ? "reviews-btn btn-active" : "reviews-btn"}
@@ -154,8 +161,8 @@ const MovieDetail = () => {
       </div>
       <Row className={related ? "related-content" : "hide"}>
         {movieRecommendations.results &&
-          movieRecommendations.results.map((recs) => (
-            <Col lg={3} md={6} sm={12}>
+          movieRecommendations.results.map((recs, index) => (
+            <Col lg={3} md={6} sm={12} key={index}>
               <RelatedMovies recs={recs} />
             </Col>
           ))}
