@@ -85,6 +85,8 @@ function getMovieDetails(id) {
         genreApi,
       ]);
 
+      console.log(movieDetails);
+
       dispatch({
         type: "GET_MOVIE_DETAILS",
         payload: {
@@ -108,9 +110,9 @@ function getMoviesList(page, keyword, option, category) {
 
       let getMovieListApi;
 
-      console.log("keyword?", keyword);
-      console.log("option?", option);
-      console.log("category?", category);
+      // console.log("keyword?", keyword);
+      // console.log("option?", option);
+      // console.log("category?", category);
 
       if (keyword !== "") {
         getMovieListApi = api.get(
@@ -118,7 +120,7 @@ function getMoviesList(page, keyword, option, category) {
         );
       } else if (option !== "") {
         getMovieListApi = api.get(
-          `/discover/movie?page=1&language=en&include_adult=true&include_video=false&sort_by=${option}&api_key=${API_KEY}`
+          `/discover/movie?page=1&language=en&include_adult=false&include_video=false&sort_by=${option}&api_key=${API_KEY}`
         );
       } else if (category !== "") {
         getMovieListApi = api.get(

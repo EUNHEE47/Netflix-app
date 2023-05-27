@@ -597,24 +597,24 @@ body {
       border-bottom: 2px solid $basic-color;
       border-radius: 0;
     }
-    option {
-      &:hover {
-        background-color: red;
-      }
-    }
   }
 }
 
-.singleCategory {
-  border: 1px solid blue;
+.closed .singleCategory {
   list-style: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  margin: 0;
   li {
-    border: 1px solid red;
-    width: fit-content;
-    margin-right: 1em;
+    background: rgb(229, 9, 20);
+    background: radial-gradient(
+      circle,
+      rgba(229, 9, 20, 0) 0%,
+      rgba(229, 9, 20, 1) 100%
+    );
+    border-radius: 10px;
+    margin: 0.5em;
     padding: 0.5em;
   }
 }
